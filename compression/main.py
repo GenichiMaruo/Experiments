@@ -3,6 +3,7 @@ from sys import byteorder
 import os
 
 from encode import *
+from decode import *
 
 if len(sys.argv) < 2:
     sys.exit(1)
