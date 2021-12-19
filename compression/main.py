@@ -17,7 +17,7 @@ with open(file,'rb') as f:
         n = int.from_bytes(b, byteorder)
         nlist.append(n)
 
-print(len(nlist))
+encode(nlist)
 
 if os.path.exists(file+'.pres'):
 	os.remove(file+'.pres')
