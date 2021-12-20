@@ -41,10 +41,12 @@ class FileArray:
 def encode(array):
     filearray = FileArray(array)
     filearray.regist_unused_num()
+    print(filearray.unused_num_count)
     dictionary = Dictionary()
     for i in range(filearray.size-1):
         word = [filearray.array[i],filearray.array[i+1]]
         dictionary.check_and_add_word(word)
     dictionary.sort_words()
     for i in range(dictionary.word_count):
-        print(dictionary.sorted_words[i].word,dictionary.sorted_words[i].count)
+        if dictionary.sorted_words[i].count > 1:
+            print(dictionary.sorted_words[i].word,dictionary.sorted_words[i].count)
