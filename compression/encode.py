@@ -1,3 +1,4 @@
+from tqdm.auto import tqdm
 class Word:
     def __init__(self, word, last_word_relative_pos, create_id):
         self.word = word
@@ -31,7 +32,8 @@ class Dictionary:
     def create_dictionary(self, filearray):
         word = []
         created_id = 0
-        for i in range(filearray.size):
+        for i in tqdm(range(filearray.size),bar_format='{l_bar}{bar:50}{r_bar}{bar:-10b}'):
+
             word.append(filearray.array[i])
             created_id = self.check_and_add_word(word, created_id)
             if created_id == 0:
@@ -53,6 +55,8 @@ def encode(array, length):
     dictionary = Dictionary(length)
     dictionary.create_dictionary(filearray)
     presarray = dictionary.export_dictionary()
-    print(len(array),'->',len(presarray))
+    a = len(array)
+    b = len(presarray)
+    print(a,'->',b,'|',b/a)
     return presarray
     
