@@ -6,12 +6,11 @@ class Word:
         self.create_id = create_id
 
 class Dictionary:
-    size = 255
-
-    def __init__(self):
+    def __init__(self,length):
         self.words = []
         self.search_words = []
         self.words_count = 0
+        self.size = (2 ** (8 * length))-1
 
     def __add_word(self, word, last_word_relative_pos):
         word_obj = Word(word, last_word_relative_pos, self.words_count)
@@ -49,9 +48,9 @@ class FileArray:
         self.size = len(array)
         self.array = array
 
-def encode(array):
+def encode(array, length):
     filearray = FileArray(array)
-    dictionary = Dictionary()
+    dictionary = Dictionary(length)
     dictionary.create_dictionary(filearray)
     presarray = dictionary.export_dictionary()
     print(len(array),'->',len(presarray))
