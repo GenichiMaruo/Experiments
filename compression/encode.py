@@ -1,50 +1,59 @@
 class Word:
-    def __init__(self, word, create_id):
+    def __init__(self, word, last_word_relative_pos, create_id):
         self.word = word
-        self.count = 1
+        self.newnum = word[len(word)-1]
+        self.last_word_relative_pos = last_word_relative_pos
         self.create_id = create_id
 
 class Dictionary:
+    size = 255
+
     def __init__(self):
         self.words = []
-        self.sorted_words = []
-        self.word_count = 0
+        self.search_words = []
+        self.words_count = 0
 
-    def __add_word(self, word):
-        word_obj = Word(word, self.word_count)
+    def __add_word(self, word, last_word_relative_pos):
+        word_obj = Word(word, last_word_relative_pos, self.words_count)
+        self.search_words.insert(0, word_obj)
+        if self.words_count >= self.size:
+            del self.search_words[self.size]
         self.words.append(word_obj)
-        self.word_count+=1
+        self.words_count += 1
 
-    def check_and_add_word(self, word):
-        pos = next((wd for wd in self.words if wd.word==word), None)
+    def check_and_add_word(self, word, id):
+        pos = next((wd for wd in self.search_words if wd.word==word), None)
         if pos == None:
-            self.__add_word(word)
+            self.__add_word(word, id)
+            return 0
         else:
-            self.words[pos.create_id].count += 1
+            return self.words_count - pos.create_id
 
-    def sort_words(self):
-        self.sorted_words = sorted(self.words, key=lambda w: w.count, reverse=True)
+    def create_dictionary(self, filearray):
+        word = []
+        created_id = 0
+        for i in range(filearray.size):
+            word.append(filearray.array[i])
+            created_id = self.check_and_add_word(word, created_id)
+            if created_id == 0:
+                word = []
+
+    def export_dictionary(self):
+        export_array = []
+        for i in range(self.words_count):
+            export_array.extend([self.words[i].last_word_relative_pos,self.words[i].newnum])
+        return export_array
 
 class FileArray:
     def __init__(self, array):
         self.size = len(array)
         self.array = array
-        self.unused_num = []
-        self.unused_num_count = 0
-
-    def regist_unused_num(self):
-        for i in range(256):
-            if (i in self.array) == False:
-                self.unused_num.append(i)
-        self.unused_num_count = len(self.unused_num)
 
 def encode(array):
     filearray = FileArray(array)
-    filearray.regist_unused_num()
     dictionary = Dictionary()
-    for i in range(filearray.size-1):
-        word = [filearray.array[i],filearray.array[i+1]]
-        dictionary.check_and_add_word(word)
-    dictionary.sort_words()
-    for i in range(dictionary.word_count):
-        print(dictionary.sorted_words[i].word,dictionary.sorted_words[i].count)
+    dictionary.create_dictionary(filearray)
+    presarray = dictionary.export_dictionary()
+    print(len(array),'->',len(presarray))
+    return presarray
+    
