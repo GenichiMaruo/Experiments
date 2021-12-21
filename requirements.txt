@@ -1,0 +1,7 @@
+asgiref==3.4.1
+colorama==0.4.4
+Django==4.0
+numpy==1.21.5
+sqlparse==0.4.2
+tqdm==4.62.3
+tzdata==2021.5
