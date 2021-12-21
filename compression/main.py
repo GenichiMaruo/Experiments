@@ -9,18 +9,18 @@ if len(sys.argv) < 2:
     sys.exit(1)
 
 length = 1
-nlist = []
+in_list = []
 files = sys.argv
 file = files[1]
 with open(file,'rb') as f:
     while b := f.read(length):
         n = int.from_bytes(b, byteorder)
-        nlist.append(n)
+        in_list.append(n)
 
-encode(nlist)
+out_list = encode(in_list)
 
 if os.path.exists(file+'.pres'):
 	os.remove(file+'.pres')
 with open(file+'.pres','wb') as out_file:
-    blist = [n.to_bytes(length, byteorder) for n in nlist]
+    blist = [n.to_bytes(length, byteorder) for n in out_list]
     out_file.writelines(blist)
