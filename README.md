@@ -1,7 +1,20 @@
 # Experiments
-アルゴリズム等のプログラムの実験
-compression
-使い方
-$ python main.py <任意のファイル>
-- 任意のファイル名（拡張子込み）に.presが付加されたファイルが生成される
-- .presのファイルを指定すると圧縮前のファイルが生成される
+アルゴリズム等のプログラム実験用のリポジトリ
+
+# compression
+LZ78 圧縮プログラム
+
+# requirement
+tqdm : 圧縮,解凍の進捗確認のため
+```bash
+pip install -r requirements.txt
+```
+
+#usage
+```bash
+$ python main.py <任意のファイルパス>
+```
+
+* 任意のファイル名（拡張子込み）に.presが付加されたファイルが生成
+* .presのファイルを指定するとファイルが解凍される
+* 単体のファイル指定のみ対応
