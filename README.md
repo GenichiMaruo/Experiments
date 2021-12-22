@@ -12,6 +12,7 @@ pip install -r requirements.txt
 
 # usage
 ```bash
+$ cd compression
 $ python main.py <任意のファイルパス>
 ```
 
