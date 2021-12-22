@@ -10,7 +10,7 @@ tqdm : 圧縮,解凍の進捗確認のため
 pip install -r requirements.txt
 ```
 
-#　usage
+# usage
 ```bash
 $ python main.py <任意のファイルパス>
 ```
