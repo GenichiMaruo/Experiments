@@ -7,7 +7,7 @@ LZ78 圧縮プログラム
 # requirement
 tqdm : 圧縮,解凍の進捗確認のため
 ```bash
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 
 # usage
