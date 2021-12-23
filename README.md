@@ -1,16 +1,16 @@
 # Experiments
 アルゴリズム等のプログラム実験用のリポジトリ
 
-# compression
+## compression
 LZ78 圧縮プログラム
 
-# requirement
+## requirement
 tqdm : 圧縮,解凍の進捗確認のため
 ```bash
 $ pip install -r requirements.txt
 ```
 
-# usage
+## usage
 ```bash
 $ cd compression
 $ python main.py <任意のファイルパス>
