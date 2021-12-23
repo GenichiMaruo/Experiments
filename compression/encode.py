@@ -33,7 +33,6 @@ class Dictionary:
         word = []
         created_id = 0
         for i in tqdm(range(filearray.size),bar_format='{l_bar}{bar:50}{r_bar}{bar:-10b}'):
-
             word.append(filearray.array[i])
             created_id = self.check_and_add_word(word, created_id)
             if created_id == 0:
